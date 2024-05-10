@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  api:
+    container_name: api
+    depends_on: 
+      - postgres
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: /app/run.sh
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 8000:8000
+    restart: on-failure:5
+    env_file:
+      - .env
+
+  postgres:
+    container_name: db
+    image: 'postgres:15.3-alpine'
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    volumes: 
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local

@@ -1,0 +1,25 @@
+{
+	"name": "POC Dev Container",
+	// Change name of the container
+	"runArgs": ["--name", "sqlalchemy-dev"],
+	// Add the Dev Container Dockerfile
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	// Run post create script
+	"postCreateCommand": "bash ./.devcontainer/post_create_command.sh",
+	// Choose dev as the default user
+	"remoteUser": "dev",
+	// Mount the .ssh repository to use GitHub
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/dev/.ssh,readonly,type=bind"
+	],
+	// Add extensions
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python"
+			]
+		}
+	}
+}
