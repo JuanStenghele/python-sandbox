@@ -6,7 +6,6 @@ from db_schema.book_db import Book as DBBook
 
 class BookDAL():
   def __init__(self, db : Database) -> None:
-    print(db)
     self.session : Session = db.session()
 
   def create_book(self, book : Book) -> None:
@@ -15,3 +14,8 @@ class BookDAL():
       name = book.name
 		)
     self.session.add(db_book)
+
+  def get_books(self, search_term : str) -> list:
+    query = self.session.query(DBBook)
+    query = query.filter(DBBook.name.contains(search_term, autoescape = True))
+    return [Book.from_orm(book) for book in query.all()]

@@ -2,18 +2,16 @@ import uuid
 
 
 from dal.book_dal import BookDAL
-from database import Database
 from objects.book import Book
+from concurrent.futures import ThreadPoolExecutor
 
 
 BOOK_SAMPLES = 50000
 
 
 class BookService():
-  def __init__(self, book_dal : BookDAL, db : Database) -> None:
+  def __init__(self, book_dal : BookDAL) -> None:
     self.book_dal : BookDAL = book_dal
-    print(db)
-    self.session = db.session()
 
   def create_sample_books(self):
     for _ in range(BOOK_SAMPLES):
@@ -24,5 +22,20 @@ class BookService():
       )
       self.book_dal.create_book(book)
 
-  def ping(self) -> str:
-    return "pong"
+  def get_books(self, search_term : str) -> list:
+    return self.book_dal.get_books(search_term)
+
+  def get_books_seq(self, search_terms : list) -> list:
+    result = []
+    for search_term in search_terms:
+      books = self.get_books(search_term)
+      result += books
+    return result
+
+  def get_books_par(self, search_terms : list) -> list:
+    result = []
+    with ThreadPoolExecutor() as executor:
+      futures = [executor.submit(self.get_books, search_term) for search_term in search_terms]
+      for future in futures:
+        result += future.result()
+    return result

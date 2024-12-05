@@ -31,6 +31,5 @@ class Container(DeclarativeContainer):
 
   book_service = providers.Factory(
     BookService,
-    book_dal = book_dal,
-    db = db
+    book_dal = book_dal
   )
