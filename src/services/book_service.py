@@ -6,7 +6,7 @@ from objects.book import Book
 from concurrent.futures import ThreadPoolExecutor
 
 
-BOOK_SAMPLES = 50000
+BOOK_SAMPLES = 10
 
 
 class BookService():
@@ -21,6 +21,9 @@ class BookService():
         name = f"The {id} book"
       )
       self.book_dal.create_book(book)
+
+  def get_book(self, id : str) -> Book:
+    return self.book_dal.get_book(id)
 
   def get_books(self, search_term : str) -> list:
     return self.book_dal.get_books(search_term)

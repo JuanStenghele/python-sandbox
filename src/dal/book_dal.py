@@ -19,3 +19,10 @@ class BookDAL():
     query = self.session.query(DBBook)
     query = query.filter(DBBook.name.contains(search_term, autoescape = True))
     return [Book.from_orm(book) for book in query.all()]
+
+  def get_book(self, id : str) -> Book:
+    query = self.session.query(DBBook)
+    query = query.filter(DBBook.id == id).first()
+    if query is None:
+      return None
+    return Book.from_orm(query)
