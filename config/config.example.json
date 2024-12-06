@@ -1,5 +1,5 @@
 {
     "db": {
-        "url": "postgresql://admin:kzxfngm5ckt2FBH3xef@postgres:5432/db"
+        "url": "postgresql+psycopg://admin:kzxfngm5ckt2FBH3xef@postgres:5432/db"
     }
 }
