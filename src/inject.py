@@ -1,5 +1,6 @@
 from dependency_injector import providers
 from dependency_injector.containers import DeclarativeContainer, WiringConfiguration
+from constants import DEFAULT_CONFIG_FILE_PATH
 from dal.book_dal import BookDAL
 from database import Database
 from services.book_service import BookService
@@ -14,13 +15,18 @@ class Container(DeclarativeContainer):
     ]
   )
 
+  config = providers.Configuration(
+    json_files = [DEFAULT_CONFIG_FILE_PATH],
+    strict = True
+  )
+
   logger = providers.Factory(
     Logger
   )
 
   db = providers.Singleton(
     Database, 
-    url = "postgresql://admin:kzxfngm5ckt2FBH3xef@postgres:5432/db",
+    url = config.db.url,
     logger = logger
   )
 

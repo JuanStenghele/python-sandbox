@@ -1,0 +1,2 @@
+# Config
+DEFAULT_CONFIG_FILE_PATH = "../config/config.json"

@@ -4,7 +4,6 @@ from dependency_injector.wiring import inject, Provide
 from inject import Container
 from services.logger import Logger
 from starlette.middleware.base import BaseHTTPMiddleware
-from sqlalchemy.orm import Session
 
 
 @inject

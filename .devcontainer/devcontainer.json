@@ -1,7 +1,7 @@
 {
 	"name": "POC Dev Container",
 	// Change name of the container
-	"runArgs": ["--name", "sqlalchemy-dev"],
+	"runArgs": ["--name", "example-api"],
 	// Add the Dev Container Dockerfile
 	"build": {
 		"dockerfile": "Dockerfile"

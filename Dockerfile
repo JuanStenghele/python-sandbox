@@ -7,6 +7,8 @@ WORKDIR /app/src
 COPY ./requirements.txt /app
 RUN pip install --no-cache-dir --upgrade --requirement /app/requirements.txt
 
+COPY ./config /app/config
+
 COPY ./scripts/run.sh /app
 RUN chmod +x /app/run.sh
 
