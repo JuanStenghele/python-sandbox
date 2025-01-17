@@ -57,6 +57,12 @@ Forward API to local:
 minikube service example-api-service
 ```
 
+Restart deployments:
+
+```bash
+kubectl rollout restart deployments
+```
+
 ## Tests
 
 To run the tests execute:
