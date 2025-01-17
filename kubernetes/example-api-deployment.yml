@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: example-api
-        image: juanstenghele/example-api
+        image: example-api
+        imagePullPolicy: Never
         resources:
           limits:
             memory: "256Mi"

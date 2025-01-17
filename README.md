@@ -27,6 +27,18 @@ Run minikube:
 minikube start --driver=docker
 ```
 
+Build API Docker image:
+
+```bash
+docker build . -t example-api
+```
+
+Upload to Minikube the docker image:
+
+```bash
+minikube image load example-api
+```
+
 Apply the local setup:
 
 ```bash
