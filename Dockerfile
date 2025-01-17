@@ -1,15 +1,13 @@
 FROM python:3.10
 
-RUN apt-get update && apt-get install -y netcat-openbsd
+WORKDIR /example-api
 
-WORKDIR /app/src
+COPY ./requirements.txt ./
 
-COPY ./requirements.txt /app
-RUN pip install --no-cache-dir --upgrade --requirement /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /example-api/requirements.txt
 
-COPY ./config /app/config
+COPY ./src ./src
 
-COPY ./scripts/run.sh /app
-RUN chmod +x /app/run.sh
+COPY ./config ./config
 
-COPY ./src /app/src
+CMD ["fastapi", "dev", "/example-api/src/main.py", "--port", "8000", "--host", "0.0.0.0"]

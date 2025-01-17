@@ -19,6 +19,32 @@ docker compose up
 
 The API will be running on `http://localhost:8000/`.
 
+### Kubernetes
+
+Run minikube:
+
+```bash
+minikube start --driver=docker
+```
+
+Apply the local setup:
+
+```bash
+kubectl apply -f kubernetes
+```
+
+Open dashboard:
+
+```bash
+minikube dashboard
+```
+
+Forward API to local:
+
+```bash
+minikube service example-api-service
+```
+
 ## Tests
 
 To run the tests execute:
