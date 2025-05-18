@@ -1,3 +1,4 @@
+from time import sleep
 from fastapi import APIRouter, Depends
 from constants import Tags
 from objects.health_check import HealthCheckResponse

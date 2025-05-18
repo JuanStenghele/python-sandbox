@@ -15,11 +15,6 @@ class BookDAL():
 		)
     self.session.add(db_book)
 
-  def get_books(self, search_term : str) -> list:
-    query = self.session.query(DBBook)
-    query = query.filter(DBBook.name.contains(search_term, autoescape = True))
-    return [Book.from_orm(book) for book in query.all()]
-
   def get_book(self, id : str) -> Book:
     query = self.session.query(DBBook)
     query = query.filter(DBBook.id == id).first()
