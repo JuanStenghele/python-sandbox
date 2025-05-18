@@ -1,7 +1,7 @@
 {
 	"name": "POC Dev Container",
 	// Change name of the container
-	"runArgs": ["--name", "example-api"],
+	"runArgs": ["--name", "dev-example-api"],
 	// Add the Dev Container Dockerfile
 	"build": {
 		"dockerfile": "Dockerfile"

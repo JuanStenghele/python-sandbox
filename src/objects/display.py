@@ -3,7 +3,7 @@ from objects.book import Book
 
 
 class BookCreationRequest(BaseObj):
-    name : str
+  name : str
 
 
 class BookCreationResponse(BookCreationRequest):

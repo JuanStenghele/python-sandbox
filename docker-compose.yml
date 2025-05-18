@@ -16,7 +16,7 @@ services:
       - .env
 
   postgres:
-    container_name: db
+    container_name: postgres
     image: 'postgres:15.3-alpine'
     ports:
       - 5432:5432

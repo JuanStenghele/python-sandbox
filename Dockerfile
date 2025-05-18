@@ -8,6 +8,4 @@ RUN pip install --no-cache-dir --upgrade -r /example-api/requirements.txt
 
 COPY ./src ./src
 
-COPY ./config ./config
-
 CMD ["fastapi", "dev", "/example-api/src/main.py", "--port", "8000", "--host", "0.0.0.0"]
