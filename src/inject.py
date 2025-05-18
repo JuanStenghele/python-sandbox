@@ -1,11 +1,12 @@
+from logging import getLogger
 from dependency_injector import providers
 from dependency_injector.containers import DeclarativeContainer, WiringConfiguration
 from dal.book_dal import BookDAL
+from dal.health_check_dal import HealthCheckDAL
 from database import Database
 from services.book_service import BookService
-from services.logger import Logger
 from utils.database import build_db_url
-from constants import POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_HOST_DEFAULT, POSTGRES_PORT_DEFAULT
+from constants import POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_HOST_DEFAULT, POSTGRES_PORT_DEFAULT, LOGGER_NAME
 
 
 class Container(DeclarativeContainer):
@@ -26,8 +27,9 @@ class Container(DeclarativeContainer):
   config.db.host.from_env(POSTGRES_HOST, default = POSTGRES_HOST_DEFAULT)
   config.db.port.from_env(POSTGRES_PORT, default = POSTGRES_PORT_DEFAULT)
 
-  logger = providers.Factory(
-    Logger
+  logger = providers.Callable(
+    getLogger,
+    name = LOGGER_NAME
   )
 
   db_url = providers.Callable(
@@ -42,6 +44,12 @@ class Container(DeclarativeContainer):
   db = providers.Singleton(
     Database, 
     url = db_url,
+    logger = logger
+  )
+
+  health_check_dal = providers.Factory(
+    HealthCheckDAL,
+    db = db,
     logger = logger
   )
 

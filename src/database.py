@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, orm
 from sqlalchemy.orm import Session, declarative_base
-from services.logger import Logger
+from logging import Logger
 
 
 Base = declarative_base()

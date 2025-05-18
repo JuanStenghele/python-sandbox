@@ -6,7 +6,10 @@ from controllers.book_controller import router as book_router
 from controllers.health_check import router as health_check_router
 from controllers.middleware import setup_middleware
 from inject import Container
+from services.logger import setup_logger
 
+
+setup_logger()
 
 app : FastAPI = FastAPI()
 if os.getenv("TESTING") != "true":

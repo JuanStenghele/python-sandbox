@@ -2,7 +2,7 @@ from fastapi import Depends, FastAPI, Request, Response
 from database import Database
 from dependency_injector.wiring import inject, Provide
 from inject import Container
-from services.logger import Logger
+from logging import Logger
 from starlette.middleware.base import BaseHTTPMiddleware
 
 
