@@ -1,10 +1,9 @@
-from database import Base
-from sqlalchemy import Column, String
+from typing import Optional
+from sqlmodel import SQLModel, Field
 
 
-# DB image model
-class Book(Base):
+class Book(SQLModel, table = True):
   __tablename__ = "books"
-
-  id = Column(String, primary_key = True, index = True)
-  name = Column(String, nullable = False)
+  
+  id: str = Field(primary_key = True, index = True)
+  name: str = Field(nullable = False)

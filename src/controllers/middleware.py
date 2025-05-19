@@ -12,19 +12,19 @@ class DBSessionMiddleware(BaseHTTPMiddleware):
       self, 
       app, 
       dispatch = None, 
-      logger : Logger = Depends(Provide[Container.logger]), 
-      db : Database = Depends(Provide[Container.db])
+      logger: Logger = Depends(Provide[Container.logger]), 
+      db: Database = Depends(Provide[Container.db])
     ) -> None:
     super().__init__(app, dispatch)
     self.logger = logger
-    self.db : Database = db
+    self.db: Database = db
 
   async def dispatch(
       self, 
       request: Request, 
       call_next
     ):
-    response : Response = await call_next(request)
+    response: Response = await call_next(request)
     self.logger.info("DB middleware called")
     if 200 <= response.status_code < 400:
       self.db.commit_session()
@@ -34,5 +34,5 @@ class DBSessionMiddleware(BaseHTTPMiddleware):
     return response
 
 
-def setup_middleware(app : FastAPI) -> None:
+def setup_middleware(app: FastAPI) -> None:
   app.add_middleware(DBSessionMiddleware)

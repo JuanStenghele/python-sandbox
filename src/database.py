@@ -1,32 +1,21 @@
-from sqlalchemy import create_engine, orm
-from sqlalchemy.orm import Session, declarative_base
+from sqlmodel import create_engine, Session, SQLModel
 from logging import Logger
-
-
-Base = declarative_base()
 
 
 class Database():
   def __init__(self, url : str, logger : Logger) -> None:
     self.engine = create_engine(url)
-    self.session_factory = orm.scoped_session(
-      orm.sessionmaker(
-        autocommit = False,
-        autoflush = True,
-        bind = self.engine
-      )
-    )
     self.current_session : Session | None = None
     self.logger : Logger = logger
 
   def create_database(self) -> None:
-    Base.metadata.create_all(self.engine)
+    SQLModel.metadata.create_all(self.engine)
     self.logger.info("DB creation")
 
   def session(self) -> Session:
     if self.current_session is not None:
       return self.current_session
-    self.current_session = self.session_factory()
+    self.current_session = Session(self.engine)
     self.logger.info("DB new session opened")
     return self.current_session
 
