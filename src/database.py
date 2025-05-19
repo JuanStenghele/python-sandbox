@@ -4,7 +4,12 @@ from logging import Logger
 
 class Database():
   def __init__(self, url : str, logger : Logger) -> None:
-    self.engine = create_engine(url)
+    self.engine = create_engine(
+      url, 
+      connect_args = {
+        "check_same_thread": False
+      }
+    )
     self.current_session : Session | None = None
     self.logger : Logger = logger
 
