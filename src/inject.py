@@ -12,9 +12,9 @@ from constants import POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HO
 class Container(DeclarativeContainer):
   wiring_config = WiringConfiguration(
     modules = [
+      "controllers.dependencies",
       "controllers.book_controller",
-      "controllers.health_check",
-      "controllers.middleware"
+      "controllers.health_check"
     ]
   )
 
@@ -49,13 +49,11 @@ class Container(DeclarativeContainer):
 
   health_check_dal = providers.Factory(
     HealthCheckDAL,
-    db = db,
     logger = logger
   )
 
   book_dal = providers.Factory(
-    BookDAL,
-    db = db
+    BookDAL
   )
 
   book_service = providers.Factory(

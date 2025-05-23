@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from dependency_injector.wiring import inject, Provide
+from sqlmodel import Session
 from constants import Tags
 from inject import Container
 from objects.display import BookCreationRequest, BookCreationResponse
 from services.book_service import BookService
 from logging import Logger
+from controllers.dependencies import get_session
 
 
 router = APIRouter()
@@ -14,11 +16,12 @@ router = APIRouter()
 @inject
 def get_books(
 	id: str,
+	session: Session = Depends(get_session),
 	book_service: BookService = Depends(Provide[Container.book_service]),
 	logger: Logger = Depends(Provide[Container.logger])
 ):
 	try:
-		return book_service.get_book(id)
+		return book_service.get_book(session, id)
 	except Exception as e:
 		logger.error(f"Error getting book: {e}")
 		raise HTTPException(detail = "UNKNOWN_ERROR", status_code = status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -28,11 +31,12 @@ def get_books(
 @inject
 def create_books(
 	book: BookCreationRequest,
+	session: Session = Depends(get_session),
 	book_service: BookService = Depends(Provide[Container.book_service]),
 	logger: Logger = Depends(Provide[Container.logger])
 ):
 	try:
-		book = book_service.create_book(book.name)
+		book = book_service.create_book(session, book.name)
 		return BookCreationResponse.from_book(book)
 	except Exception as e:
 		logger.error(f"Error creating book: {e}")

@@ -1,16 +1,14 @@
-from sqlmodel import text
-from database import Database
+from sqlmodel import text, Session
 from logging import Logger
 
 
 class HealthCheckDAL():
-  def __init__(self, db: Database, logger: Logger) -> None:
-    self.db = db
+  def __init__(self, logger: Logger) -> None:
     self.logger = logger
 
-  def health_check(self) -> str:
+  def health_check(self, session: Session) -> str:
     try:
-      self.db.session().exec(text("SELECT 1"))
+      session.exec(text("SELECT 1"))
       return "ok"
     except Exception as e:
       self.logger.error(f"Error checking postgres database health: {e}")
