@@ -1,6 +1,10 @@
 from enum import Enum
 
 
+# Env contants
+ENV = "ENV"
+ENV_TESTING = "test"
+
 # DB constants
 POSTGRES_DB = "POSTGRES_DB"
 POSTGRES_USER = "POSTGRES_USER"

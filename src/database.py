@@ -3,9 +3,10 @@ from logging import Logger
 
 
 class Database():
-  def __init__(self, url : str, logger : Logger) -> None:
+  def __init__(self, url: str, logger: Logger) -> None:
+    self.logger: Logger = logger
+    self.logger.info(f"Connecting to DB url: {url}")
     self.engine = create_engine(url)
-    self.logger : Logger = logger
 
   def create_database(self) -> None:
     SQLModel.metadata.create_all(self.engine)

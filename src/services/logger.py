@@ -1,4 +1,4 @@
-import logging, sys
+import logging, sys, logging.config
 
 
 from constants import LOGGER_NAME
