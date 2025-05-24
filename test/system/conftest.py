@@ -5,24 +5,13 @@ from fastapi.testclient import TestClient
 from pytest import FixtureRequest
 from testcontainers.core.container import DockerContainer
 from testcontainers.core.waiting_utils import wait_for_logs
-from inject import Container
 from constants import POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD
+from utils.env_vars import build_env_vars_dict, set_env_vars
 
 
 db_name = "db"
 db_user = "dev"
 db_password = "kzxfngm5ckt2FBH3xef"
-
-def build_config(db_host: str, db_port: int) -> dict:
-  return {
-    "db": {
-      "name": db_name,
-      "user": db_user,
-      "password": db_password,
-      "host": db_host,
-      "port": db_port
-    }
-  }
 
 class Context():
   def __init__(self, client: TestClient, db_name: str, db_user: str, db_password: str, db_host: str, db_port: int):
@@ -55,19 +44,19 @@ def postgres_instance(request: FixtureRequest) -> tuple[str, int]:
 
 @pytest.fixture(scope = "session", autouse = True)
 def context(request: FixtureRequest):
-  from main import app
-
   db_host, db_port = postgres_instance(request)
 
-  container = Container()
+  env_vars = build_env_vars_dict(db_host, db_port, db_name, db_user, db_password)
+  with set_env_vars(env_vars):
+    from inject import Container
+    from main import app
 
-  config = build_config(db_host, db_port)
-  container.config.override(config)
+    container = Container()
 
-  app.container = container
-  db = app.container.db()
-  db.create_database()
+    app.container = container
+    db = app.container.db()
+    db.create_database()
 
-  yield Context(TestClient(app), db_name, db_user, db_password, db_host, db_port)
+    yield Context(TestClient(app), db_name, db_user, db_password, db_host, db_port)
 
   container.unwire()

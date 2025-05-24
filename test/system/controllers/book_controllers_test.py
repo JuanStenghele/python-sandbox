@@ -8,7 +8,7 @@ from system.conftest import Context
 class TestBookController():
   @pytest.fixture(autouse = True)
   def after_each(self, context: Context):
-    yield None
+    yield
     delete_all_books(context.db_url)
 
   def test_retrieve_book(self, context: Context):
