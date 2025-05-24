@@ -1,4 +1,4 @@
-name: Pipeline
+name: Tests
 
 on:
   workflow_dispatch
@@ -19,6 +19,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt -r test/requirements.txt
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: |
-          pytest test -v
+          pytest test -v --cov=src --cov-report=html
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov/
+          retention-days: 7
