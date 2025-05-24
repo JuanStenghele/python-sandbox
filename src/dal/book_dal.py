@@ -15,4 +15,6 @@ class BookDAL():
   def get_book(self, session: Session, id: str) -> Book | None:
     statement = select(DBBook).where(DBBook.id == id)
     result = session.exec(statement).first()
-    return result
+    if result is None:
+      return None
+    return Book.model_validate(result)
