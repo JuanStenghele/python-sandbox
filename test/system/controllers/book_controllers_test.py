@@ -2,7 +2,7 @@ import pytest
 
 
 from system.utils.db_utils import insert_book, delete_all_books
-from system.conftest import Context 
+from system.conftest import Context
 
 
 class TestBookController():
@@ -22,7 +22,7 @@ class TestBookController():
       'name': 'Harry Potter'
     }
 
-  def test_retrieve_unexistent_book(self, context : Context):
+  def test_retrieve_unexistent_book(self, context: Context):
     insert_book(context.db_url, '123', 'Harry Potter')
     insert_book(context.db_url, '456', 'The Lord of the Rings')
     response = context.client.get("/books", params = { "id": "789" })

@@ -16,8 +16,8 @@ router = APIRouter()
 @inject
 def get_books(
 	id: str,
-	session: Session = Depends(get_session),
 	book_service: BookService = Depends(Provide[Container.book_service]),
+	session: Session = Depends(get_session),
 	logger: Logger = Depends(Provide[Container.logger])
 ):
 	try:
@@ -34,8 +34,8 @@ def get_books(
 @inject
 def create_books(
 	book: BookCreationRequest,
-	session: Session = Depends(get_session),
 	book_service: BookService = Depends(Provide[Container.book_service]),
+	session: Session = Depends(get_session),
 	logger: Logger = Depends(Provide[Container.logger])
 ):
 	try:
