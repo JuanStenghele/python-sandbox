@@ -8,7 +8,7 @@ from sqlmodel import Session
 
 class BookService():
   def __init__(self, book_dal: BookDAL) -> None:
-    self.book_dal : BookDAL = book_dal
+    self.book_dal: BookDAL = book_dal
 
   def create_book(self, session: Session, book_name: str) -> Book:
     id = str(uuid.uuid4())

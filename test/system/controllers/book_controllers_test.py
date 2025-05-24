@@ -26,6 +26,25 @@ class TestBookController():
     insert_book(context.db_url, '123', 'Harry Potter')
     insert_book(context.db_url, '456', 'The Lord of the Rings')
     response = context.client.get("/books", params = { "id": "789" })
+    assert response.status_code == 404
+    data = response.json()
+    assert data == {
+      'detail': 'BOOK_NOT_FOUND'
+    }
+
+  def test_create_book(self, context: Context):
+    book_name = 'Harry Potter'
+    response = context.client.post("/books", json = { "name": book_name })
     assert response.status_code == 200
     data = response.json()
-    assert data is None
+    assert data['id'] is not None
+    assert data['name'] == book_name
+
+  def test_create_book_with_duplicate_name(self, context: Context):
+    book_name = 'Harry Potter'
+    insert_book(context.db_url, '123', book_name)
+    response = context.client.post("/books", json = { "name": book_name })
+    assert response.status_code == 200
+    data = response.json()
+    assert data['id'] is not None
+    assert data['name'] == book_name

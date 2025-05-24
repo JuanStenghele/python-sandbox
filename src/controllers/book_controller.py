@@ -21,10 +21,13 @@ def get_books(
 	logger: Logger = Depends(Provide[Container.logger])
 ):
 	try:
-		return book_service.get_book(session, id)
+		book = book_service.get_book(session, id)
 	except Exception as e:
 		logger.error(f"Error getting book: {e}")
 		raise HTTPException(detail = "UNKNOWN_ERROR", status_code = status.HTTP_500_INTERNAL_SERVER_ERROR)
+	if book is None:
+		raise HTTPException(detail = "BOOK_NOT_FOUND", status_code = status.HTTP_404_NOT_FOUND)
+	return book
 
 
 @router.post("/books", response_model = BookCreationResponse, tags = [Tags.BOOKS])
