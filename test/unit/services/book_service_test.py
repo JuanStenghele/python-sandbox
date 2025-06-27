@@ -37,6 +37,7 @@ class TestBookService():
     session_mock = MagicMock(spec = Session)
     instance = BookService(book_dal_mock)
     book_result = instance.get_book(session_mock, book_id)
+    assert book_result is not None
     assert book_result.id == book_id
     assert book_result.name == book_name
 

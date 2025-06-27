@@ -19,5 +19,5 @@ class BookService():
     self.book_dal.create_book(session, book)
     return book
 
-  def get_book(self, session: Session, id: str) -> Book:
+  def get_book(self, session: Session, id: str) -> Book | None:
     return self.book_dal.get_book(session, id)

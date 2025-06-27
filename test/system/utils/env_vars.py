@@ -23,7 +23,7 @@ def set_env_vars(env_vars: dict[str, str]) -> Generator[None, None, None]:
 
 def build_env_vars_dict(
   db_host: str,
-  db_port: int,
+  db_port: str,
   db_name: str,
   db_user: str,
   db_password: str

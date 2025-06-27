@@ -7,6 +7,7 @@ from objects.display import BookCreationRequest, BookCreationResponse
 from services.book_service import BookService
 from logging import Logger
 from controllers.dependencies import get_session
+from objects.book import Book
 
 
 router = APIRouter()
@@ -39,8 +40,8 @@ def create_books(
 	logger: Logger = Depends(Provide[Container.logger])
 ):
 	try:
-		book = book_service.create_book(session, book.name)
-		return BookCreationResponse.from_book(book)
+		result: Book = book_service.create_book(session, book.name)
+		return BookCreationResponse.from_book(result)
 	except Exception as e:
 		logger.error(f"Error creating book: {e}")
 		raise HTTPException(detail = "UNKNOWN_ERROR", status_code = status.HTTP_500_INTERNAL_SERVER_ERROR)

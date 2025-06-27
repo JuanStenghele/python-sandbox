@@ -44,6 +44,7 @@ class TestBookDal():
     session_mock.exec.return_value = exec_mock
     instance = BookDAL()
     result = instance.get_book(session_mock, book_id)
+    assert result is not None
     assert result.id == book_id
     assert result.name == book_name
     assert session_mock.exec.call_count == 1

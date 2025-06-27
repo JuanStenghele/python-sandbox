@@ -1,4 +1,5 @@
-from sqlmodel import text, Session
+from sqlmodel import Session, select
+from sqlalchemy import literal
 from logging import Logger
 
 
@@ -8,7 +9,7 @@ class HealthCheckDAL():
 
   def health_check(self, session: Session) -> str:
     try:
-      session.exec(text("SELECT 1"))
+      session.exec(select(literal(1)))
       return "ok"
     except Exception as e:
       self.logger.error(f"Error checking postgres database health: {e}")
