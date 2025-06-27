@@ -36,8 +36,19 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
+    - name: Wait for EKS cluster to be ready
+      run: |
+        echo "Waiting for EKS cluster to be ready..."
+        aws eks wait cluster-active --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+        echo "EKS cluster is ready!"
+
     - name: Update kube config
       run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+
+    - name: Verify kubectl connection
+      run: |
+        kubectl cluster-info
+        kubectl get nodes
 
     - name: Apply Kubernetes manifests
       run: |
