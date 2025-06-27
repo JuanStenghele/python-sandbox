@@ -4,3 +4,8 @@ config/config.json
 .pytest_cache
 .idea
 .DS_Store
+terraform/*.tfvars
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
