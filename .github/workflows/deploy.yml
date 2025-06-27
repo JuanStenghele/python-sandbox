@@ -36,19 +36,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.5.0
-
-    - name: Terraform Init and Apply
-      working-directory: ./terraform
-      run: |
-        terraform init
-        terraform apply -auto-approve -input=false \
-          -var="aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" \
-          -var="aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-
     - name: Update kube config
       run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
 
@@ -57,11 +44,8 @@ jobs:
         kubectl apply -f kubernetes/postgres-db-persistent-volume-claim.yml
         kubectl apply -f kubernetes/postgres-db-stateful-set.yml
         kubectl apply -f kubernetes/postgres-db-service.yml
-        kubectl apply -f kubernetes/juans-fastapi-poc-deployment.yml
-        kubectl apply -f kubernetes/juans-fastapi-poc-service.yml
-
-    - name: Wait for PostgreSQL to be ready
-      run: kubectl wait --for=condition=ready pod -l app=juans-fastapi-poc-postgres --timeout=300s
+        kubectl apply -f kubernetes/example-api-deployment.yml
+        kubectl apply -f kubernetes/example-api-service.yml
 
     - name: Verify deployment
       run: |
