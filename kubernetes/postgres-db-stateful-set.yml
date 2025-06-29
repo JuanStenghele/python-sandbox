@@ -17,7 +17,7 @@ spec:
         image: postgres:15.3-alpine
         envFrom:
         - secretRef:
-          name: example-api-postgres-secrets
+            name: example-api-postgres-secrets
         ports:
         - containerPort: 5432
         volumeMounts:
