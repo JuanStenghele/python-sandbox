@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: example-api
-        image: example-api
-        imagePullPolicy: Never
+        image: jstenghele/juans-fastapi-poc:latest
+        imagePullPolicy: Always
         resources:
           limits:
             memory: "256Mi"
