@@ -16,6 +16,11 @@ spec:
       - name: example-api
         image: jstenghele/juans-fastapi-poc:latest
         imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: example-api-secrets
+        - configMapRef:
+            name: example-api-config-map
         resources:
           limits:
             memory: "256Mi"

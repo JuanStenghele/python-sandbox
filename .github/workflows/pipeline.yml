@@ -71,11 +71,14 @@ jobs:
         run: |
           kubectl cluster-info
 
+      - name: Populate secrets
+        run: |
+          export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
+          export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
+          export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+          envsubst < kubernetes/postgres-db-secrets.template.yaml > kubernetes/postgres-db-secrets.yaml
+          envsubst < kubernetes/example-api-secrets.template.yaml > kubernetes/example-api-secrets.yaml
+
       - name: Deploy to EKS
         run: |
           kubectl apply -f kubernetes/
-
-      - name: Verify deployment
-        run: |
-          kubectl get pods
-          kubectl get services 

@@ -15,13 +15,9 @@ spec:
       containers:
       - name: db
         image: postgres:15.3-alpine
-        env:
-        - name: POSTGRES_DB
-          value: db
-        - name: POSTGRES_USER
-          value: admin
-        - name: POSTGRES_PASSWORD
-          value: kzxfngm5ckt2FBH3xef
+        envFrom:
+        - secretRef:
+          name: example-api-postgres-secrets
         ports:
         - containerPort: 5432
         volumeMounts:
