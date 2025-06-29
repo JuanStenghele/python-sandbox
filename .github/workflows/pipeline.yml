@@ -81,4 +81,4 @@ jobs:
 
       - name: Deploy to EKS
         run: |
-          kubectl apply -f kubernetes/
+          kubectl apply --recursive -f kubernetes/

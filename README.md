@@ -39,6 +39,8 @@ Upload to Minikube the docker image:
 minikube image load example-api
 ```
 
+Add the required secrets by moving the `.template.yml` into `.yml` files and replace the `${ENV_VARS}` with the custom credentials.
+
 Apply the local setup:
 
 ```bash

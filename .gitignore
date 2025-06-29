@@ -12,3 +12,7 @@ terraform/*.tfvars
 .terraform.tfstate.lock.info
 terraform.tfstate
 terraform.tfstate.backup
+
+# Kubernetes
+kubernetes/example-api-secrets.yml
+postgres-db-secrets.yml
