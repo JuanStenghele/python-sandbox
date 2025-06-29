@@ -18,9 +18,9 @@ spec:
         imagePullPolicy: Always
         envFrom:
         - secretRef:
-            name: example-api-secrets
+          name: example-api-secrets
         - configMapRef:
-            name: example-api-config-map
+          name: example-api-config-map
         resources:
           limits:
             memory: "256Mi"
