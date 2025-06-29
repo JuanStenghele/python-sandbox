@@ -15,5 +15,5 @@ output "vpc_id" {
 
 output "configure_kubectl" {
   description = "Configure kubectl: make sure you're logged in with the correct AWS profile and run the following command to update your kubeconfig"
-  value       = "aws eks --region us-east-1 update-kubeconfig --name juans-fastapi-poc"
+  value       = "aws eks --region us-east-1 update-kubeconfig --name ${var.app_name}-eks"
 }

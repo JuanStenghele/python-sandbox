@@ -70,3 +70,23 @@ To run the tests execute:
 ```bash
 python -m pytest
 ```
+
+## EKS
+
+The Dev Container contains all the dependencies installed to run this section. Configure AWS credentials:
+
+```bash
+aws configure
+```
+
+Add EKS context:
+
+```bash
+aws eks --region us-east-1 update-kubeconfig --name juans-fastapi-poc-eks
+```
+
+Now `kubectl` can be used:
+
+```bash
+kubectl cluster-info
+```

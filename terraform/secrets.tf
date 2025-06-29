@@ -11,9 +11,3 @@ variable "aws_secret_access_key" {
   sensitive   = true
   default     = null
 }
-
-variable "aws_region" {
-  description = "AWS Region"
-  type        = string
-  default     = "us-east-1"
-}
