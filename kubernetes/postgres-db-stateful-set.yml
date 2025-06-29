@@ -18,6 +18,8 @@ spec:
         envFrom:
         - secretRef:
             name: example-api-postgres-secrets
+        - configMapRef:
+            name: example-api-postgres-config-map
         ports:
         - containerPort: 5432
         volumeMounts:
