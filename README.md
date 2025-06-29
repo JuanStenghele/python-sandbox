@@ -44,7 +44,7 @@ Add the required secrets by moving the `.template.yml` into `.yml` files and rep
 Apply the local setup:
 
 ```bash
-kubectl apply -f kubernetes
+kubectl apply --recursive -f kubernetes
 ```
 
 Open dashboard:
