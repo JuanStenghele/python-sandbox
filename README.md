@@ -1,4 +1,4 @@
-# FastAPI POC
+# Python Sandbox
 
 Example web API for testing and learning new stuff. Developed in Python 3.10 using FastAPI.
 
