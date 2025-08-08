@@ -14,5 +14,4 @@ terraform.tfstate
 terraform.tfstate.backup
 
 # Kubernetes
-kubernetes/python-sandbox-secrets.yml
-postgres-db-secrets.yml
+*-secrets.yml

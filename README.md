@@ -30,7 +30,7 @@ minikube start --driver=docker
 Build API Docker image:
 
 ```bash
-docker build . -t python-sandox
+docker build . -t python-sandbox
 ```
 
 Upload to Minikube the docker image:
@@ -84,7 +84,7 @@ aws configure
 Add EKS context:
 
 ```bash
-aws eks --region us-east-1 update-kubeconfig --name juans-fastapi-poc-eks
+aws eks --region us-east-1 update-kubeconfig --name juans-python-sandbox-eks
 ```
 
 Now `kubectl` can be used:
