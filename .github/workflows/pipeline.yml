@@ -76,8 +76,8 @@ jobs:
           export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
           export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
           export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
-          envsubst < kubernetes/postgres-db/postgres-db-secrets.template.yaml > kubernetes/postgres-db/postgres-db-secrets.yaml
-          envsubst < kubernetes/api/python-sandbox-secrets.template.yaml > kubernetes/api/python-sandbox-secrets.yaml
+          envsubst < kubernetes/postgres-db/postgres-db-secrets.template.yml > kubernetes/postgres-db/postgres-db-secrets.yml
+          envsubst < kubernetes/api/python-sandbox-secrets.template.yml > kubernetes/api/python-sandbox-secrets.yml
 
       - name: Deploy to EKS
         run: |
