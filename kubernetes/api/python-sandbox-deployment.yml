@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: python-sandbox
-        image: jstenghele/juans-fastapi-poc:latest
+        image: jstenghele/juans-python-sandbox:latest
         imagePullPolicy: Always
         envFrom:
         - secretRef:
