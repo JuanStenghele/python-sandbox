@@ -9,3 +9,15 @@ variable "aws_region" {
   type        = string
   default     = "us-east-1"
 }
+
+variable "main_domain_name" {
+  description = "Kubernetes app domain name"
+  type        = string
+  default     = "25101999.xyz"
+}
+
+variable "python_sandbox_subdomain_name" {
+  description = "Subdomain for the python-sandbox service"
+  type        = string
+  default     = "python-sandbox"
+}
