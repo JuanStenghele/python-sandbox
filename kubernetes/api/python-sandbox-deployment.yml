@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-api-deployment
+  name: python-sandbox-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: example-api
+      app: python-sandbox
   template:
     metadata:
       labels:
-        app: example-api
+        app: python-sandbox
     spec:
       containers:
-      - name: example-api
+      - name: python-sandbox
         image: jstenghele/juans-fastapi-poc:latest
         imagePullPolicy: Always
         envFrom:
         - secretRef:
-            name: example-api-secrets
+            name: python-sandbox-secrets
         - configMapRef:
-            name: example-api-config-map
+            name: python-sandbox-config-map
         resources:
           limits:
             memory: "256Mi"

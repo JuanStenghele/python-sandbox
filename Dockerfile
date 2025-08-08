@@ -1,11 +1,11 @@
 FROM python:3.10
 
-WORKDIR /example-api
+WORKDIR /python-sandbox
 
 COPY ./requirements.txt ./
 
-RUN pip install --no-cache-dir --upgrade -r /example-api/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /python-sandbox/requirements.txt
 
 COPY ./src ./src
 
-CMD ["fastapi", "dev", "/example-api/src/main.py", "--port", "8000", "--host", "0.0.0.0"]
+CMD ["fastapi", "dev", "/python-sandbox/src/main.py", "--port", "8000", "--host", "0.0.0.0"]

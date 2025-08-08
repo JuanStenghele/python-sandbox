@@ -7,4 +7,4 @@ spec:
   - port: 5432
   clusterIP: None
   selector:
-    app: example-api-postgres
+    app: python-sandbox-postgres

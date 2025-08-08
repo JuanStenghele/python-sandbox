@@ -30,13 +30,13 @@ minikube start --driver=docker
 Build API Docker image:
 
 ```bash
-docker build . -t example-api
+docker build . -t python-sandox
 ```
 
 Upload to Minikube the docker image:
 
 ```bash
-minikube image load example-api
+minikube image load python-sandbox
 ```
 
 Add the required secrets by moving the `.template.yml` into `.yml` files and replace the `${ENV_VARS}` with the custom credentials.
@@ -56,7 +56,7 @@ minikube dashboard
 Forward API to local:
 
 ```bash
-minikube service example-api-service
+minikube service python-sandbox-service
 ```
 
 Restart deployments:

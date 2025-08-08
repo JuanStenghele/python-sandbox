@@ -1,7 +1,7 @@
 {
-	"name": "POC Dev Container",
+	"name": "Python Sandbox Dev Container",
 	// Change name of the container
-	"runArgs": ["--name", "dev-example-api"],
+	"runArgs": ["--name", "dev-python-sandbox"],
 	// Add the Dev Container Dockerfile
 	"build": {
 		"dockerfile": "Dockerfile"
