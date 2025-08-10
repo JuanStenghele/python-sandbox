@@ -1,8 +1,12 @@
 data "aws_eks_cluster" "cluster" {
+  depends_on = [module.eks]
+
   name = "${var.app_name}-eks"
 }
 
 data "aws_eks_cluster_auth" "cluster" {
+  depends_on = [module.eks]
+
   name = "${var.app_name}-eks"
 }
 
@@ -13,6 +17,8 @@ provider "kubernetes" {
 }
 
 data "kubernetes_service" "python_sandbox_service" {
+  depends_on = [module.eks]
+
   metadata {
     name      = "python-sandbox-service"
     namespace = "default"
