@@ -61,11 +61,11 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Update kubeconfig for EKS
         run: |
-          aws eks update-kubeconfig --name juans-python-sandbox-eks --region us-east-1
+          aws eks update-kubeconfig --name juans-python-sandbox-eks --region ${{ vars.AWS_REGION }}
 
       - name: Verify kubectl connection
         run: |
