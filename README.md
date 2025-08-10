@@ -53,6 +53,14 @@ Open dashboard:
 minikube dashboard
 ```
 
+Access the FastAPI Swagger by running:
+
+```bash
+minikube tunnel
+```
+
+And accessing `http://localhost/docs`
+
 Forward API to local:
 
 ```bash
